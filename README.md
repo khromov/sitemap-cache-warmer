@@ -40,6 +40,7 @@ The script will provide a JSON output with stats about the crawl, example:
     "status": "OK",
     "message": "Processed sitemap: http://example.com/sitemap.xml",
     "duration": 9.5575199127197,
+    "count" : 4
     "log": [
         "Processed sub-sitemap: http://example.com/post-sitemap.xml",
         "Processed sub-sitemap: http://example.com/page-sitemap.xml",
