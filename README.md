@@ -26,7 +26,7 @@ http://example.com/warm-cache/warm.php?key=SECRET_KEY&url=http://example.com/sit
 You will need to use CRON to schedule the crawls as often as you wish. Here's an example using cURL and crontab:
 
 ```
-0 * * * * curl http://example.com/warm-cache/warm.php?key=SECRET_KEY&url=http://example.com/sitemap.xml&sleep=0 >/dev/null 2>&1
+0 * * * * curl "http://example.com/warm-cache/warm.php?key=SECRET_KEY&url=http://example.com/sitemap.xml&sleep=0" >/dev/null 2>&1
 ```
 
 If your host provides a CRON URL visiting function, all you need to do is enter the URL, as described in the "Usage" section.
