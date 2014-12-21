@@ -30,8 +30,8 @@ class PHP_Warmer_Response
         header('Content-Type: application/json');
         echo (json_encode(array(
             'status' => $this->status,
-            'count' => $this->count,
             'message' => $this->message,
+            'count' => $this->count,
             'duration' => $this->duration,
             'log' => $this->log,
             'visited_urls' => $this->visited_urls,
