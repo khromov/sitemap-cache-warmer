@@ -68,5 +68,4 @@ If you have a lot of pages and few visitors, this may cause increased load on th
 
 #### Compatibility
 
-The plugin has been tested with the WordPress plugins [Yoast WordPress SEO](https://wordpress.org/plugins/wordpress-seo/) and [Google XML Sitemaps](https://wordpress.org/plugins/google-sitemap-generator/).  
-It should work with any sitemap which conforms to the [sitemap standard](http://www.sitemaps.org/protocol.html).
+The plugin has been tested with the WordPress plugins [Yoast WordPress SEO](https://wordpress.org/plugins/wordpress-seo/) and [Google XML Sitemaps](https://wordpress.org/plugins/google-sitemap-generator/). It should work with any sitemap which conforms to the [sitemap standard](http://www.sitemaps.org/protocol.html).
