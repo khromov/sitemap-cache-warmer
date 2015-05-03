@@ -1,8 +1,12 @@
 Sitemap Cache Warmer
 ====================
 
+##### This script is currently undergoing a rewrite and may not work properly.
+
 This PHP script crawls URL:s based on a sitemap. It is used to keep your cache warm by visiting all the pages in your sitemap 
 at regular intervals. It supports sub-sitemap (Sitemap index).
+
+
 
 #### Usage
 
