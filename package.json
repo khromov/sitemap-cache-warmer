@@ -1,0 +1,14 @@
+{
+  "name": "khromov/cache-warmer",
+  "description": "A cache warmer written in PHP",
+  "license": "GPL",
+  "type": "library",
+  "require": {
+    "mustache/mustache" : "~2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Khromov\\Cache_Warmer\\": "src"
+    }
+  }
+}
