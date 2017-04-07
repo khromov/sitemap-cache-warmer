@@ -8,6 +8,9 @@ class PHP_Warmer
     var $response;
     var $timer;
     var $sleep_time;
+    var $context;
+    var $from;
+    var $to;
 
     function __construct($config)
     {
@@ -17,14 +20,26 @@ class PHP_Warmer
            ), $config
         );
         $this->sleep_time = (int)$this->get_parameter('sleep', 0);
+        $this->from = (int)$this->get_parameter('from', 0);
+        $this->to = (int)$this->get_parameter('to', false);
         $this->response = new PHP_Warmer_Response();
+        $this->context = stream_context_create(
+            /****
+			UNCOMMENT THIS IF YOU USE AN HTTP LOGIN, COMMONLY USED ON TEST ENVS
+			array (
+				'http' => array (
+					'header' => 'Authorization: Basic ' . base64_encode("youruser:yourpassword")
+				)
+			)
+			*/
+        );
     }
 
     function run()
     {
         // Disable time limit
         set_time_limit(0);
-
+        $counter = 0;
         // Authenticate request
         if($this->authenticated_request())
         {
@@ -38,15 +53,20 @@ class PHP_Warmer
                 // Discover URL links
                 $urls = $this->process_sitemap($sitemap_url);
 
+                
                 // Visit links
                 foreach($urls as $url)
                 {
-                    $url_content = @file_get_contents($url);
+                    if($this->from <= $counter && 
+                            (empty($this->to) || (!empty($this->to) && $this->to > $counter) )) {
+                        $url_content = @file_get_contents($url,false,$this->context);
 
-                    if(($this->sleep_time > 0))
-                        sleep($this->sleep_time);
+                        if(($this->sleep_time > 0))
+                            sleep($this->sleep_time);
 
-                    $this->response->set_visited_url($url);
+                        $this->response->set_visited_url($url);
+                    }
+                    $counter++;
                 }
 
                 //Stop timer
@@ -54,9 +74,6 @@ class PHP_Warmer
 
                 // Send timer data to response
                 $this->response->set_duration($timer->duration());
-
-                // Set amount of items parsed
-                $this->response->set_count(sizeof($urls));
 
                 // Done!
                 if(sizeof($urls) > 0)
@@ -83,7 +100,7 @@ class PHP_Warmer
         $urls = array();
 
         // Grab sitemap and load into SimpleXML
-        $sitemap_xml = @file_get_contents($url);
+        $sitemap_xml = @file_get_contents($url,false,$this->context);
 
         if(($sitemap = @simplexml_load_string($sitemap_xml)) !== false)
         {

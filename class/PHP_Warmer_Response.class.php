@@ -52,6 +52,7 @@ class PHP_Warmer_Response
     function set_visited_url($url)
     {
         $this->visited_urls[] = $url;
+        $this->count++;
     }
 
     function set_duration($duration)

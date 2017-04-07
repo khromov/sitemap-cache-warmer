@@ -1,4 +1,7 @@
 <?php
+if(PHP_SAPI === 'cli' && $argc>1){
+	parse_str(implode('&',array_slice($argv, 1)), $_GET);
+}
 // Set configuration
 $config = include 'config.php';
 
