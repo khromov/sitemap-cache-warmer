@@ -20,6 +20,8 @@ http://example.com/warm-cache/warm.php?key=SECRET_KEY&url=http://example.com/sit
 **key** - Secret key, as entered in config.php (Required)  
 **url** - URL to the root sitemap, usually /sitemap.xml (Required)  
 **sleep** - Amount of time to sleep between each request in seconds. Used for throttling on slow hosts. (Optional, default is to not throttle.)  
+**from** - Number of the url to start with. (Optional, default is 0).  
+**to** - Number of the url to stop. Usefull to test some URLs on a heavy sitemap (Optional, default is till the end of the sitemap)
 
 #### Scheduling the crawl
 
@@ -52,6 +54,16 @@ The script will provide a JSON output with stats about the crawl, example:
         "http://example.com/page4/",
     ]
 }
+```
+
+#### Using the CLI
+
+Also you can launch the script from the CLI to bypass the common errors of timeout (504) from an Nginx server.
+
+```
+php /whatever/you/have/uploaded/it/warm.php url=http://example.com/sitemap.xml sleep=0 key=SECRET_KEY 
+php /whatever/you/have/uploaded/it/warm.php url=http://example.com/sitemap.xml sleep=0 key=SECRET_KEY from=10 to=100
+php /whatever/you/have/uploaded/it/warm.php url=http://example.com/sitemap.xml sleep=0 key=SECRET_KEY to=25
 ```
 
 #### Crawl strategies
