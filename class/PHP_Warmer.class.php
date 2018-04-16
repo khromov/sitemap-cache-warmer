@@ -11,12 +11,14 @@ class PHP_Warmer
     var $context;
     var $from;
     var $to;
+    var $urlProblems = array();
 
     function __construct($config)
     {
         $this->config = array_merge(
            array(
-               'key' => 'default'
+               // 'key' => 'default',
+               'reportProblematicUrls' => false
            ), $config
         );
         $this->sleep_time = (int)$this->get_parameter('sleep', 0);
@@ -52,7 +54,7 @@ class PHP_Warmer
 
                 // Discover URL links
                 $urls = $this->process_sitemap($sitemap_url);
-
+                sort($urls);
                 
                 // Visit links
                 foreach($urls as $url)
@@ -60,6 +62,11 @@ class PHP_Warmer
                     if($this->from <= $counter && 
                             (empty($this->to) || (!empty($this->to) && $this->to > $counter) )) {
                         $url_content = @file_get_contents($url,false,$this->context);
+
+                        // Prepare info about URLs with error
+                        if ($url_content === false && $this->config['reportProblematicUrls']) {
+                            $this->urlProblems[] = $url;
+                        }
 
                         if(($this->sleep_time > 0))
                             sleep($this->sleep_time);
@@ -89,6 +96,10 @@ class PHP_Warmer
         else
         {
             $this->response->set_message('Incorrect key', 'ERROR');
+        }
+
+        if ($this->config['reportProblematicUrls'] && count($this->urlProblems) > 0) {
+            @mail($this->config['reportProblematicUrlsTo'], 'Warming cache ends with errors', "Those URLs cannot be warmed:\n" . implode("\n", $this->urlProblems));
         }
 
         $this->response->display();
