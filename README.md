@@ -56,6 +56,19 @@ The script will provide a JSON output with stats about the crawl, example:
 }
 ```
 
+#### Reporting unaccessible pages
+You can set up mail alert when some URLs cannot be accessed. Just modify your `config.php` like this:
+```php
+<?php
+return array(
+    'key' => '9f316c95a356aab49cf5e4fcf3418295' // Secret key to allow traversing sitemaps
+    'reportProblematicUrls' => true,
+    'reportProblematicUrlsTo' => "your-address@example.com"
+);
+```
+
+URL is reported whencannot be opened with `file_get_contents()`. Proper handling of status codes will be added soon.
+
 #### Using the CLI
 
 Also you can launch the script from the CLI to bypass the common errors of timeout (504) from an Nginx server.
