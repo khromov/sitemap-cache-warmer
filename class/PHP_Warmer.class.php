@@ -55,13 +55,13 @@ class PHP_Warmer
                 // Discover URL links
                 $urls = $this->process_sitemap($sitemap_url);
                 sort($urls);
-                
+
                 // Visit links
                 foreach($urls as $url)
                 {
-                    if($this->from <= $counter && 
+                    if($this->from <= $counter &&
                             (empty($this->to) || (!empty($this->to) && $this->to > $counter) )) {
-                        $url_content = @file_get_contents($url,false,$this->context);
+                        $url_content = @file_get_contents(trim($url),false,$this->context);
 
                         // Prepare info about URLs with error
                         if ($url_content === false && $this->config['reportProblematicUrls']) {
