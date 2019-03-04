@@ -1,12 +1,12 @@
 Sitemap Cache Warmer
 ====================
 
-This PHP script crawls URL:s based on a sitemap. It is used to keep your cache warm by visiting all the pages in your sitemap 
+This PHP script crawls URL:s based on a sitemap. It is used to keep your cache warm by visiting all the pages in your sitemap
 at regular intervals. It supports sub-sitemap (Sitemap index).
 
 #### Usage
 
-Edit the file config.php and change the key parameter to a secret value. Upload the file onto your web host, preferably into
+Rename config.php.example to config.php and change the key parameter to a secret value. Upload the file onto your web host, preferably into
 its own folder (for example, /warm-cache)
 
 Once you have uploaded this file onto your web host, you can visit the following URL to traverse a sitemap and visit all its URL:s:
@@ -17,10 +17,10 @@ http://example.com/warm-cache/warm.php?key=SECRET_KEY&url=http://example.com/sit
 
 ###### Available parameters
 
-**key** - Secret key, as entered in config.php (Required)  
-**url** - URL to the root sitemap, usually /sitemap.xml (Required)  
-**sleep** - Amount of time to sleep between each request in seconds. Used for throttling on slow hosts. (Optional, default is to not throttle.)  
-**from** - Number of the url to start with. (Optional, default is 0).  
+**key** - Secret key, as entered in config.php (Required)
+**url** - URL to the root sitemap, usually /sitemap.xml (Required)
+**sleep** - Amount of time to sleep between each request in seconds. Used for throttling on slow hosts. (Optional, default is to not throttle.)
+**from** - Number of the url to start with. (Optional, default is 0).
 **to** - Number of the url to stop. Useful to test some URLs on a heavy sitemap (Optional, default is till the end of the sitemap)
 
 #### Scheduling the crawl
@@ -74,7 +74,7 @@ URL is reported whencannot be opened with `file_get_contents()`. Proper handling
 Also you can launch the script from the CLI to bypass the common errors of timeout (504) from an Nginx server.
 
 ```
-php /whatever/you/have/uploaded/it/warm.php url=http://example.com/sitemap.xml sleep=0 key=SECRET_KEY 
+php /whatever/you/have/uploaded/it/warm.php url=http://example.com/sitemap.xml sleep=0 key=SECRET_KEY
 php /whatever/you/have/uploaded/it/warm.php url=http://example.com/sitemap.xml sleep=0 key=SECRET_KEY from=10 to=100
 php /whatever/you/have/uploaded/it/warm.php url=http://example.com/sitemap.xml sleep=0 key=SECRET_KEY to=25
 ```
