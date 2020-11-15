@@ -112,7 +112,7 @@ class PHP_Warmer
 
         // Grab sitemap and load into SimpleXML
         $sitemap_xml = @file_get_contents($url,false,$this->context);
-	$sitemap_xml = preg_replace("/<\?xml (.+?) \?>/","",$sitemap_xml);
+        $sitemap_xml = preg_replace("/<\?xml (.+?) \?>/","",$sitemap_xml);
 
         if(($sitemap = @simplexml_load_string($sitemap_xml)) !== false)
         {
